@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController/*, UITableViewDelegate, UITableViewDataSource */{
     
-
+    let taskManager = TaskManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        //tableView.delegate = self
+        //tableView.dataSource = self
+        
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,7 +26,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return taskManager.getTaskCount()
 }
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "gameCell") as! GameTableViewCell
+        cell.setUpCell(game: GameManager.sharedInstance.getGame(index: indexPath.row))
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }}

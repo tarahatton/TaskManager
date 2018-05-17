@@ -8,9 +8,28 @@
 
 import UIKit
 
-class AddTaskViewController: UIViewController, UIPickerViewDelegate, UITableViewDataSource {
+
+class AddTaskViewController: UIViewController {
     
     
+    @IBOutlet weak var datePicker: UIDatePicker!
     
-    let genres = [ 
+    @IBOutlet weak var addTaskTextField: UITextField!
+    
+    var selectedDate: String?
+
+  
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func pickerViewChanged(_ sender: Any) {
+        datePicker.datePickerMode = UIDatePickerMode.date
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM dd yyyy"
+        selectedDate = dateFormatter.string(from: datePicker.date)
+    }
+    
+    
+        //let genres = [ ]
+
 }
